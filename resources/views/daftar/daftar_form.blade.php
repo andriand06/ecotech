@@ -103,28 +103,76 @@
             <h2>Pendaftaran Ecotech</h2>
             <p>Silahkan isi data diri anda di formulir berikut ini.</p>
         </div>
+        @if(session('pesan'))
+            <div class="alert alert-success">
+            {{session('pesan')}}
+            </div>
+
+        @endif
         <div class="row content">
             <div class="col-lg-6">
-                <form>
+                <form action="{{route('daftar.simpan')}}" method="post">
+                @csrf
                     <div class="form-group">
-                        <label for="nama">Nama</label>
-                        <input type="text" class="form-control" id="nama">
-                        
+                      <label for="nama">Nama Lengkap</label>
+                      <input type="text" class="form-control" name="nama" id="nama">
+                      <span class="text-helper">{{ $errors->first('nama') }}</span>
                     </div>
                     <div class="jenis">
-                        <p>Jenis Kelamin</p>
-                        <div class="form-group form-check-inline">
-                            <input type="checkbox" class="form-check-input" id="jk" value="Laki-Laki">
-                            <label class="form-check-label" for="jk">Laki-Laki</label>
+                      <p>Jenis Kelamin</p>
+                      <div class="form-group form-check-inline">
+                          <input type="checkbox" class="form-check-input" name="jk" id="jk" value="Laki-Laki">
+                          <label class="form-check-label" for="jk">Laki-Laki</label>
 
                             
-                        </div>
-                        <div class="form-group form-check-inline">
-                            <input type="checkbox" class="form-check-input" id="jk" value="Perempuan">
-                            <label class="form-check-label" for="jk">Perempuan</label>
-                        </div>
+                      </div>
+                      <div class="form-group form-check-inline">
+                          <input type="checkbox" class="form-check-input" name="jk" id="jk" value="Perempuan">
+                          <label class="form-check-label" for="jk">Perempuan</label>
+                      </div>
+                      <span class="text-helper">{{ $errors->first('jk') }}</span>
                     </div>
-                    
+                    <div class="form-group">
+                      <label for="tanggal_lahir">Tanggal Lahir</label>
+                      <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control">
+                      <span class="text-helper">{{ $errors->first('tanggal_lahir') }}</span>
+                    </div>
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="email" name="email" id="email" class="form-control">
+                      <span class="text-helper">{{ $errors->first('email') }}</span>
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="password" name="password" id="password" class="form-control">
+                      <span class="text-helper">{{ $errors->first('password') }}</span>
+                    </div>
+                    <div class="form-group">
+                      <label for="asal_sekolah">Asal Sekolah</label>
+                      <select name="asal_sekolah" class="form-control">
+                        <option selected>Asal Sekolah</option>
+                        <option value="SMA Unggul Sakti">SMA Unggul Sakti</option>
+                        <option value="SMA Xaverius 1">SMA Xaverius 1</option>
+                        <option value="SMAN 3">SMAN 3</option>
+                        <option value="SMAN 5">SMAN 5</option>
+                      </select>
+                      <span class="text-helper">{{ $errors->first('asal_sekolah') }}</span>
+                    </div>
+                    <div class="form-group">
+                      <label for="foto">Foto</label>
+                      <input type="file" name="foto" id="foto" class="form-control">
+                      <span class="text-helper">{{ $errors->first('foto') }}</span>
+                    </div>
+                    <div class="form-group">
+                      <label for="jurusan">Jurusan</label>
+                      <select name="jurusan_id" id="jurusan" class="form-control">
+                        @foreach ($jurusan as $item)
+                        <option value="{{$item->nama}}">{{$item->nama}}</option>
+
+                        @endforeach
+                      </select>
+                      <span class="text-helper">{{ $errors->first('jurusan_id') }}</span>
+                    </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>

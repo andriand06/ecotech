@@ -12,7 +12,9 @@ body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
 }
-
+.text-helper {
+  color :red;
+}
 a {
   color: #0880e8;
 }
