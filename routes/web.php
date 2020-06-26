@@ -25,6 +25,7 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::post('user/delete/{users}','UserController@delete')->name('user.delete');
 });
 
-Route::get('daftar/daftar_form/','MahasiswaController@formDaftar')->name('daftar.form');
+Route::get('daftar/daftar_form','MahasiswaController@formDaftar')->name('daftar.form');
 Route::post('simpan-daftar/','MahasiswaController@simpanDaftar')->name('daftar.simpan');
-Route::get('hasil-daftar','MahasiswaController@hasilDaftar');
+Route::get('mahasiswa/beranda','MahasiswaController@beranda');
+Route::get('form-login');

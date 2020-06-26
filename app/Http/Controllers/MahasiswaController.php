@@ -43,11 +43,19 @@ class MahasiswaController extends Controller
         $registrasi->jurusan_id = $request->jurusan_id;
         $registrasi->status = 'baru';
         $registrasi->save();
-        return back()->with('pesan','Registrasi Berhasil!');
+
+        \Auth::guard('mahasiswa')->login($mahasiswa);
+        return redirect('mahasiswa/beranda') ->with('pesan','Registrasi Berhasil!');
        
     }
-    public function hasilDaftar()
+    public function beranda()
     {
-        
+        if (\Auth::guard('mahasiswa')->check()) 
+        {
+            echo "sudah login";
+        }
+        else {
+            echo "anda Belum login";
+        }
     }
 }

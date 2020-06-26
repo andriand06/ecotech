@@ -3,8 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
-class Mahasiswa extends Model
+use Illuminate\Contractts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Auth\Authenticatable;
+class Mahasiswa extends Model implements AuthenticatableContract
 {
+    use Authenticatable;
+    protected $guard = 'mahasiswa';
     protected $guarded = [];
 }

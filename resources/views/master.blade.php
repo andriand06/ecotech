@@ -57,7 +57,57 @@
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top ">
-   @yield('header')
+  <div class="container d-flex align-items-center">
+
+<h1 class="logo mr-auto"><a href="#header" class="scrollto">Ecotech</a></h1>
+<!-- Uncomment below if you prefer to use an image logo -->
+<!-- <a href="#header" class="logo mr-auto scrollto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+<nav class="nav-menu d-none d-lg-block">
+  <ul>
+    <li class="{{ request()->is('/') ? 'active' : '' }}"><a href="{{url('/')}}">Home</a></li>
+    <li class="{{ request()->is('daftar/daftar_form') ? 'active' : '' }}"><a href="{{ route('daftar.form') }}">Pendaftaran</a></li>
+    <li class="{{ request()->is('form-login') ? 'active' : '' }}"><a href="{{ url('form-login') }}">Login</a></li>
+    <li><a href="{{route('about')}}">About</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li class="drop-down"><a href="">Services </a>
+    
+      <ul>
+
+        <li class="drop-down"><a href="#">Web Development</a>
+          <ul>
+            <li><a href="#">Website Company Profile</a></li>
+            <li><a href="#">Website E-Commerce</a></li>
+           
+          </ul>
+        </li>
+        <li class="drop-down"><a href="#">Video & Graphic Design</a>
+          <ul>
+            <li><a href="#">Website Design</a></li>
+            <li><a href="#">Logo Design</a></li>
+            <li><a href="#">Banner Design</a></li>
+            <li><a href="#">Brocure Design</a></li>
+            <li><a href="#">Card Design</a></li>
+            <li><a href="#">Custom Design</a></li>           
+          </ul>
+          <li class="drop-down"><a href="#">Digital Marketing</a>
+          <ul>
+            <li><a href="#">Search Engine Optimization</a></li>
+            <li><a href="#">Social Media Ads</a></li>
+            <li><a href="#">Video Animation</a></li>
+            <li><a href="#">Website Management</a></li>
+            <li><a href="#">Social Media Management</a></li>
+           
+          </ul>
+      </ul>
+    </li>
+    <li><a href="#contact">Contact</a></li>
+
+  </ul>
+</nav><!-- .nav-menu -->
+
+</div>
   </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
