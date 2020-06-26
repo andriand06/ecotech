@@ -20,30 +20,30 @@ class MahasiswaController extends Controller
             'nama' => 'required',
             'jk' => 'required',
             'tanggal_lahir' => 'required',
-            'email' => 'required'|'email'|'unique:App\Mahasiswa,email',
+            'email' => 'required|email|unique:mahasiswas,email',
             'password' => 'required','min:8',
             'asal_sekolah' =>'required',
-            'foto' =>'required'|'mimes:jpg,png,jpeg',
+            'foto' =>'required|mimes:jpg,png,jpeg',
             'jurusan_id' => 'required'
         ]);
         $path = $request->file('foto')->store('foto-mahasiswa');
         $mahasiswa = new Mahasiswa;
         $mahasiswa->nama = $request->nama;
-        $mahasiswa->jk = $request('jk');
+        $mahasiswa->jk = $request->jk;
         $mahasiswa->tanggal_lahir = $request->tanggal_lahir;
-        $mahasiswa->email = $request('email');
+        $mahasiswa->email = $request->email;
         $mahasiswa->password = bcrypt($request->password);
         $mahasiswa->asal_sekolah = $request->asal_sekolah;
         $mahasiswa->foto = $path;
         $mahasiswa->save();
-        
+       
         $registrasi = new Registrasi;
-        $registrasi->user_id = 0;
+        $registrasi->user_id = '1';
         $registrasi->mahasiswa_id = $mahasiswa->id;
         $registrasi->jurusan_id = $request->jurusan_id;
         $registrasi->status = 'baru';
         $registrasi->save();
-        return redirect('daftar.form')->with('pesan','Registrasi Berhasil!');
+        return back()->with('pesan','Registrasi Berhasil!');
        
     }
     public function hasilDaftar()

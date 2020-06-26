@@ -111,7 +111,7 @@
         @endif
         <div class="row content">
             <div class="col-lg-6">
-                <form action="{{route('daftar.simpan')}}" method="post">
+                <form action="{{route('daftar.simpan')}}" method="post" enctype="multipart/form-data">
                 @csrf
                     <div class="form-group">
                       <label for="nama">Nama Lengkap</label>
@@ -167,7 +167,7 @@
                       <label for="jurusan">Jurusan</label>
                       <select name="jurusan_id" id="jurusan" class="form-control">
                         @foreach ($jurusan as $item)
-                        <option value="{{$item->nama}}">{{$item->nama}}</option>
+                        <option value="{{$item->id}}">{{$item->nama}}</option>
 
                         @endforeach
                       </select>
