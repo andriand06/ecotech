@@ -52,10 +52,41 @@ class MahasiswaController extends Controller
     {
         if (\Auth::guard('mahasiswa')->check()) 
         {
-            echo "sudah login";
+            echo "sudah login sebagai ".\Auth::guard('mahasiswa')->user()->nama;
         }
         else {
             echo "anda Belum login";
         }
+    }
+    public function formLogin()
+    {
+        if(\Auth::guard('mahasiswa')->check())  {
+            return redirect('mahasiswa/beranda');
+        }
+        return view ('form_login');
+    }
+    
+    public function prosesLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|max:50',
+            'password' => 'required|min:8'
+        ]);
+        $credentials = [
+            'email' => $request->email,
+            'password' =>$request->password
+        ];
+        if(\Auth::guard('mahasiswa')->attempt($credentials)){
+            return redirect('mahasiswa/beranda');
+        }
+        else {
+            return back()->with('pesan','Login gagal');
+        }
+    }
+
+    public function logout()
+    {
+        \Auth::guard('mahasiswa')->logout();
+        return redirect('/');
     }
 }

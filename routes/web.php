@@ -28,4 +28,6 @@ Route::prefix('admin')->middleware('auth')->group(function(){
 Route::get('daftar/daftar_form','MahasiswaController@formDaftar')->name('daftar.form');
 Route::post('simpan-daftar/','MahasiswaController@simpanDaftar')->name('daftar.simpan');
 Route::get('mahasiswa/beranda','MahasiswaController@beranda');
-Route::get('form-login');
+Route::get('form-login','MahasiswaController@formLogin');
+Route::get('logout','MahasiswaController@logout');
+Route::post('proses-login','MahasiswaController@prosesLogin');
