@@ -67,10 +67,13 @@
   <ul>
     <li class="{{ request()->is('/') ? 'active' : '' }}"><a href="{{url('/')}}">Home</a></li>
     <li class="{{ request()->is('daftar/daftar_form') ? 'active' : '' }}"><a href="{{ route('daftar.form') }}">Pendaftaran</a></li>
+    @if(\Auth::guard('mahasiswa')->check())
+    <li class="{{ request()->is('mahasiswa/beranda') ? 'active' : '' }}"><a href="{{ url('mahasiswa/beranda') }}">Beranda</a></li>
+    @else
     <li class="{{ request()->is('form-login') ? 'active' : '' }}"><a href="{{ url('form-login') }}">Login</a></li>
+    @endif
     <li><a href="{{route('about')}}">About</a></li>
-    <li><a href="#team">Team</a></li>
-    <li><a href="blog.html">Blog</a></li>
+   
     <li class="drop-down"><a href="">Services </a>
     
       <ul>
@@ -102,7 +105,7 @@
           </ul>
       </ul>
     </li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="{{ url('logout')}}">Logout</a></li>
 
   </ul>
 </nav><!-- .nav-menu -->
@@ -262,6 +265,8 @@
   <!-- Template Main JS File -->
   <script src="{{ asset('anyar') }}/assets/js/main.js"></script>
 
+  
+  
 </body>
 
 </html>

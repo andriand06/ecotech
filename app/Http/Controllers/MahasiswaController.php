@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Jurusan;
 use App\Mahasiswa;
 use App\Registrasi;
+use App\Syarat;
 use Illuminate\Http\Request;
 
 class MahasiswaController extends Controller
@@ -26,7 +27,7 @@ class MahasiswaController extends Controller
             'foto' =>'required|mimes:jpg,png,jpeg',
             'jurusan_id' => 'required'
         ]);
-        $path = $request->file('foto')->store('foto-mahasiswa');
+        $path = $request->file('foto')->store('public/foto-mahasiswa');
         $mahasiswa = new Mahasiswa;
         $mahasiswa->nama = $request->nama;
         $mahasiswa->jk = $request->jk;
@@ -48,14 +49,15 @@ class MahasiswaController extends Controller
         return redirect('mahasiswa/beranda') ->with('pesan','Registrasi Berhasil!');
        
     }
-    public function beranda()
+    public function beranda(Syarat $syarat)
     {
         if (\Auth::guard('mahasiswa')->check()) 
         {
-            echo "sudah login sebagai ".\Auth::guard('mahasiswa')->user()->nama;
+            $syarat = \App\Syarat::latest()->get();
+            return view ('mahasiswa/beranda',compact('syarat'));
         }
         else {
-            echo "anda Belum login";
+            return redirect('form-login');
         }
     }
     public function formLogin()

@@ -10,4 +10,9 @@ class Mahasiswa extends Model implements AuthenticatableContract
     use Authenticatable;
     protected $guard = 'mahasiswa';
     protected $guarded = [];
+
+    public function registrasi()
+    {
+        return $this->hasMany('App\Registrasi');
+    }
 }

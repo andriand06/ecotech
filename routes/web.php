@@ -31,3 +31,5 @@ Route::get('mahasiswa/beranda','MahasiswaController@beranda');
 Route::get('form-login','MahasiswaController@formLogin');
 Route::get('logout','MahasiswaController@logout');
 Route::post('proses-login','MahasiswaController@prosesLogin');
+
+Route::post('simpan-syarat','MahasiswaController@simpanSyarat');
