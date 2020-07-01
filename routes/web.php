@@ -32,4 +32,5 @@ Route::get('form-login','MahasiswaController@formLogin');
 Route::get('logout','MahasiswaController@logout');
 Route::post('proses-login','MahasiswaController@prosesLogin');
 
-Route::post('simpan-syarat','MahasiswaController@simpanSyarat');
+Route::post('simpan-syarat','MahasiswaController@simpanSyarat')->name('simpansyarat');
+Route::get('mahasiswa/hapus-syarat/{syarat}','MahasiswaController@hapusSyarat');

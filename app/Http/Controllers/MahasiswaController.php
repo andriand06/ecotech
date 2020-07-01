@@ -5,6 +5,7 @@ use App\Jurusan;
 use App\Mahasiswa;
 use App\Registrasi;
 use App\Syarat;
+use App\RegistrasiSyarat;
 use Illuminate\Http\Request;
 
 class MahasiswaController extends Controller
@@ -49,12 +50,14 @@ class MahasiswaController extends Controller
         return redirect('mahasiswa/beranda') ->with('pesan','Registrasi Berhasil!');
        
     }
-    public function beranda(Syarat $syarat)
+    public function beranda()
     {
         if (\Auth::guard('mahasiswa')->check()) 
         {
             $syarat = \App\Syarat::latest()->get();
-            return view ('mahasiswa/beranda',compact('syarat'));
+            $data['syarat'] = $syarat;
+            $data['registrasi'] = \App\Registrasi::whereMahasiswaId(\Auth::guard('mahasiswa')->user()->id)->first();
+            return view ('mahasiswa/beranda',$data);
         }
         else {
             return redirect('form-login');
@@ -84,6 +87,28 @@ class MahasiswaController extends Controller
         else {
             return back()->with('pesan','Login gagal');
         }
+    }
+    public function simpanSyarat(Request $request)
+    {
+        $request->validate([
+            'nama' => 'required',
+            'file' => 'required|file|mimes:png,jpg,jpeg',
+        ]);
+        $file = $request->file->store('public/syarat-registrasi');
+        $syarat = new RegistrasiSyarat;
+        $syarat->nama = $request->nama;
+        $syarat->file = $file;
+        $syarat->status = 'baru';
+        $syarat->registrasi_id = \Auth::guard('mahasiswa')->user()->registrasi()->take(1)->first()->id;
+        $syarat->save();
+
+        return back()->with('pesan','Data berhasil disimpan');
+    }
+    public function hapusSyarat(RegistrasiSyarat $syarat)
+    {
+        $syarat->delete();
+        \Storage::delete($syarat->file);
+        return back()->with('pesan','Data berhasil dihapus');
     }
 
     public function logout()

@@ -28,6 +28,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('anyar') }}/assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('font')}}/css/all.css">
 
   <!-- =======================================================
   * Template Name: Anyar - v2.1.0
