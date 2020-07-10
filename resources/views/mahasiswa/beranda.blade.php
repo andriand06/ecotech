@@ -58,7 +58,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($registrasi->registrasisyarat as $item)
+                @foreach ($registrasi->syarats as $item)
                     <tr> 
                         <td>{{$loop->iteration}}</td>
                         <td>{{$item->nama}}</td>

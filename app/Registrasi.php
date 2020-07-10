@@ -20,7 +20,7 @@ class Registrasi extends Model
     {
         return $this->belongsTo('App\Jurusan');
     }
-    public function registrasisyarat()
+    public function syarats()
     {
         return $this->hasMany('App\RegistrasiSyarat');
     }

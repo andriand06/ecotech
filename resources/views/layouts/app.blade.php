@@ -40,6 +40,9 @@
                             <li class="nav-item">
                                 <a href="{{url('admin/user/index',[])}}" class="nav-link">Data User</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{url('admin/registrasi/index',[])}}" class="nav-link">Data Registrasi</a>
+                            </li>
                         @endauth
                     </ul>
 
