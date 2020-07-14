@@ -56,16 +56,15 @@ class RegistrasiController extends Controller
     public function update($id)
     {
         $registrasi = \App\Registrasi::findOrFail($id);
-        $syarat = $registrasi->syarat()->whereIn('status',['baru','diperbaiki']); 
-        if($syarat->exist())
+        $syarat = $registrasi->syarats()->whereIn('status',['baru','diperbaiki']); 
+        if($syarat->exists())
         {
             return back()->with('pesan','Status Gagal diupdate,Silahkan perbaiki Syarat Pendaftaran');
         }
-        else {
             $registrasi->status = 'diterima';
             $registrasi->save();
             return back()->with('pesan','Status berhasil di Update');
-        }
+    
         
         
     }
