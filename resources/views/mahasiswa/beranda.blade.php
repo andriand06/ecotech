@@ -21,7 +21,7 @@
         <table class="table table-sm white">
             <tbody>
                 <tr>
-                    <td rowspan="5" width="100">
+                    <td rowspan="6" width="100">
                     <img src="{{ \Storage::url(Auth::guard('mahasiswa')->user()->foto)}}" alt="foto-mahasiswa">
                     <td align="left">Nama</td>
                     <td align="left">:{{ \Auth::guard('mahasiswa')->user()->nama}}</td>
@@ -39,11 +39,15 @@
                     <td align="left">Email</td>
                     <td align="left">:{{ Auth::guard('mahasiswa')->user()->email}}</td>
                 </tr>
+              
                 <tr>
                     <td align="left">Jurusan</td>
-                    <td align="left">:{{ $registrasi->jurusan->nama}}</td>
+                    <td align="left">: {{ $registrasi->jurusan->nama}}</td>
                 </tr>
-                
+                <tr>
+                    <td align="left">Status Pendaftaran</td>
+                    <td align="left">:<h3>{{ ucwords($registrasi->status)}}</h3></td>
+                </tr>
             </tbody>
         
         </table>
@@ -63,13 +67,23 @@
                         <td>{{$loop->iteration}}</td>
                         <td>{{$item->nama}}</td>
                         <td><a href="{{ \Storage::url($item->file)}}" target="blank"><i class="fa fa-download"></i> Download File</a></td>
-                        <td><i class="fa fa-flag" aria-hidden="true"></i> {{$item->status}}</td>
-                        <td><a href="{{url('mahasiswa/hapus-syarat',$item->id)}}" onclick="return confirm('Anda Yakin ingin Menghapus File ini?')"><i class="fa fa-remove"></i> Hapus</a></td>
+                        <td><i class="fa fa-flag" aria-hidden="true"></i> {{$item->status}} <br> {{$item->keterangan}}</td>
+                        <td>
+                        @if($registrasi->status == 'diterima')
+                            berkas sudah divalidasi
+                        @else
+                        <a href="{{url('mahasiswa/hapus-syarat',$item->id)}}" onclick="return 
+                        confirm('Anda Yakin ingin Menghapus File ini?')"><i class="fa fa-remove"></i>
+                         Hapus</a></td>
+                         @endif
                     </tr>
                 @endforeach
             </tbody>
         </table>
-        <h2>Input Syarat Pendaftaran Mahasiswa Baru</h2>
+       @if($registrasi->status == 'diterima')
+        
+       @else
+       <h2>Input Syarat Pendaftaran Mahasiswa Baru</h2>
         @if(session('pesan'))
         <div class="alert alert-success">
             {{session('pesan')}}
@@ -99,6 +113,7 @@
             
 
         </form>
+        @endif
       </div>
     </section><!-- End Frequently Asked Questions Section -->
 

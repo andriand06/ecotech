@@ -106,9 +106,15 @@ class MahasiswaController extends Controller
     }
     public function hapusSyarat(RegistrasiSyarat $syarat)
     {
-        $syarat->delete();
-        \Storage::delete($syarat->file);
-        return back()->with('pesan','Data berhasil dihapus');
+        if($syarat->registrasi->status == 'diterima')
+        {
+            return back()->with('pesan','Data tidak bisa dihapus');
+        }else {
+            $syarat->delete();
+            \Storage::delete($syarat->file);
+            return back()->with('pesan','Data berhasil dihapus');
+        }
+       
     }
 
     public function logout()

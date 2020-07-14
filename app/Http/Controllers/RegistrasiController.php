@@ -47,6 +47,26 @@ class RegistrasiController extends Controller
 
     public function syaratSimpan(Request $request)
     {
-
+        $syarat = \App\RegistrasiSyarat::findOrFail($request->id);
+        $syarat->keterangan = strip_tags($request->keterangan);
+        $syarat->status = $request->status;
+        $syarat->save();
+        return back()->with('pesan','Data berhasil diupdate');
+    }
+    public function update($id)
+    {
+        $registrasi = \App\Registrasi::findOrFail($id);
+        $syarat = $registrasi->syarat()->whereIn('status',['baru','diperbaiki']); 
+        if($syarat->exist())
+        {
+            return back()->with('pesan','Status Gagal diupdate,Silahkan perbaiki Syarat Pendaftaran');
+        }
+        else {
+            $registrasi->status = 'diterima';
+            $registrasi->save();
+            return back()->with('pesan','Status berhasil di Update');
+        }
+        
+        
     }
 }
