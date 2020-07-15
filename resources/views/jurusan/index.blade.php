@@ -9,34 +9,31 @@
                     @if(session('pesan'))
                     <div class="alert alert-success">{{session('pesan')}}</div>
                     @endif
-                    
-                    <table class="table">
+                    <a href="{{action('JurusanController@create')}}" class="btn btn-primary">Tambah Data</a>
+                    <table class="table table-striped mt-3">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Nama</th>
-                                <th>Asal Sekolah</th>
-                                <th>Jurusan</th>
-                                <th>Status</th>
+                                <th>Singkatan</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($isi as $item)
+                            @foreach($model as $item)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$item->mahasiswa->nama}}</td>
-                                <td>{{$item->mahasiswa->asal_sekolah}}</td>
-                                <td>{{$item->jurusan->nama}}</td>
-                                <td>{{$item->status}}</td>
-                                <td>
-                                    <a href="{{url('admin/registrasi/syarat',$item->id)}}" class="btn btn-primary">Lihat Syarat</a>
-                                    <a href="{{url('admin/registrasi/hapus',$item->id)}}" class="btn btn-danger"  onclick="return confirm('Anda Yakin ingin Menghapus Data {{$item->mahasiswa->nama}}?')">Hapus</a>
-                                </td>
+                                <td>{{$item->nama}}</td>
+                                <td>{{$item->singkatan}}</td>
+                                <td><a href="{{action('JurusanController@edit',$item->id)}}" class="btn btn-primary">Edit</a></td>
+                                <td><a href="{{action('JurusanController@show',$item->id)}}" class="btn btn-primary">Detail</a></td>
+                                <td><a href="{{action('JurusanController@delete',$item->id)}}" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</a></td>
 
+                                
                             </tr>
                             @endforeach
-                        </tbody>    
+                        </tbody>
+                 
                     </table>
                 </div>
             </div>
@@ -44,6 +41,7 @@
     </div>
     
 </div>
+
 
 
 @endsection

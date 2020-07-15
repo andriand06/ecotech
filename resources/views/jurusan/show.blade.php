@@ -5,43 +5,38 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h1>{{$judul}}</h1>
+                    <h1>Detail Jurusan</h1>
                     @if(session('pesan'))
                     <div class="alert alert-success">{{session('pesan')}}</div>
                     @endif
-                    <a href="{{url('admin/user/tambah')}}" class="btn btn-primary">Tambah Data</a>
-                    <table class="table table-sm">
+                    <table class="table table-striped mt-3">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Nama</th>
-                                <th>Email</th>
-                                <th>Aksi</th>
+                                <th>Singkatan</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($isi as $user)
+                            @foreach($jurusan as $item)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->email}}</td>
-                                <td><a href="{{route('user.edit',$user)}}" class="btn btn-info">Edit Data</a></td>
-                                <td>
-                                    <form action="{{route('user.delete',$user)}}" method="post">
-                                        @csrf
-                                        <button type="submit" class="btn btn-primary" >Delete</button>
-                                    </form>
-                                </td>
+                                <td>{{$item->nama}}</td>
+                                <td>{{$item->singkatan}}</td> 
                             </tr>
                             @endforeach
                         </tbody>
+                 
                     </table>
-
+                    <a href="{{action('JurusanController@index')}}" class="btn btn-primary">Kembali</a>
                 </div>
             </div>
         </div>
     </div>
+    
 </div>
+
+
 
 @endsection
 

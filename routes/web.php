@@ -17,12 +17,21 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home')->name('user.index');
 Route::prefix('admin')->middleware('auth')->group(function(){
+    Route::get('jurusan/index','JurusanController@index');
+    Route::get('jurusan/tambah','JurusanController@create');
+    Route::post('jurusan/store','JurusanController@store');
+    Route::get('jurusan/edit/{id}','JurusanController@edit');
+    Route::post('jurusan/update/{id}','JurusanController@update');
+    Route::get('jurusan/show/{id}','JurusanController@show');
+    Route::get('jurusan/delete/{jurusan}','JurusanController@delete');
+
     Route::get('registrasi/index','RegistrasiController@index');
     Route::get('registrasi/hapus/{id}','RegistrasiController@hapus');
     Route::get('registrasi/syarat/{id}','RegistrasiController@syarat')->name('syarat');
     Route::get('registrasi/syarat-form/{id}','RegistrasiController@syaratForm');
     Route::post('registrasi/syarat-simpan/{id}','RegistrasiController@syaratSimpan');
     Route::get('registrasi/update/{id}','RegistrasiController@update');
+
     Route::get('user/index','UserController@index')->name('user');
     Route::get('user/tambah','UserController@tambah');
     Route::post('user/simpan','UserController@simpan');

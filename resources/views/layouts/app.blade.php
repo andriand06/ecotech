@@ -43,6 +43,9 @@
                             <li class="nav-item">
                                 <a href="{{url('admin/registrasi/index',[])}}" class="nav-link">Data Registrasi</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{action('JurusanController@index')}}" class="nav-link">Data Jurusan</a>
+                            </li>
                         @endauth
                     </ul>
 
